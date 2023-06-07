@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate() {
         if(Input.GetButton("Jump") && groundedPlayer){
             groundedPlayer = false;
-            //playerRig.AddForce(transform.up * jumpHeight);
+            playerRig.AddForce(transform.up * jumpHeight);
         }
         float horDir = Input.GetAxis("Horizontal");
         float verDir = Input.GetAxis("Vertical");
@@ -37,5 +37,6 @@ public class PlayerController : MonoBehaviour
             groundedPlayer = true;
         }
     }
+    
 
 }
