@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
-    CharacterController playerController;
+    Animator myAnimator;
     Rigidbody playerRig;
     private Vector3 playerVelocity;
 
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRig = GetComponent<Rigidbody>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,9 +30,11 @@ public class PlayerController : MonoBehaviour
         //Falta poner la condicion para que no se salga de los bordes
         if(moveInput > 0.3f && !isMoving){
             transform.DOLocalMove(rightPosition, 0.5f).OnComplete( () => isMoving = false );
+            myAnimator.SetTrigger("Dash");
             isMoving = true;
         }else if(moveInput < -0.3f && !isMoving){
             transform.DOLocalMove(leftPosition, 0.5f).OnComplete( () => isMoving = false );
+            myAnimator.SetTrigger("Dash");
             isMoving = true;
         }
         if(Input.GetButton("Jump") && groundedPlayer){
