@@ -15,4 +15,8 @@ public class TheSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
