@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody playerRig;
     private Vector3 playerVelocity;
 
-    private bool groundedPlayer;
+    [SerializeField]private bool groundedPlayer;
     private bool isMoving;
     [SerializeField] private float jumpHeight = 20.0f;
     [SerializeField] private Vector2 movingRange = new Vector2(-7,0);
@@ -23,13 +23,17 @@ public class PlayerController : MonoBehaviour
         myAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     private void FixedUpdate() {
+        
         float moveInput = Input.GetAxis("Horizontal");
         if(Input.GetButton("Jump") && groundedPlayer){
+            myAnimator.SetTrigger("Jump");
+            myAnimator.SetBool("isGrounded", false);
             groundedPlayer = false;
+
             playerRig.AddForce(transform.up * jumpHeight);
         }
+        
     }
 
     void Update(){
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.CompareTag("Ground")){
             groundedPlayer = true;
+            myAnimator.SetBool("isGrounded", true);
         }
         if (other.gameObject.CompareTag("Obstacle"))
         {
