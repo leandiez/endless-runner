@@ -63,6 +63,14 @@ public class PlayerController : MonoBehaviour
         {
             //Pantalla de game over
             Debug.Log("Perdiste");
+            myAnimator.SetTrigger("Falling");
+            isMoving = true;
+            playerSpeed = 0f;
+        }
+        if (other.gameObject.CompareTag("Sea"))
+        {
+            //Pantalla de game over
+            Debug.Log("Perdiste");
         }
     }
 
