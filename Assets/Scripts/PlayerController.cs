@@ -54,7 +54,11 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Ground")){
             groundedPlayer = true;
         }
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            //Pantalla de game over
+            Debug.Log("Perdiste");
+        }
     }
-    
 
 }
